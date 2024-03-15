@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MyGalaxy_Auction_DataAccess.Domain;
 using MyGalaxy_Auction_DataAccess.Models;
 
 namespace MyGalaxy_Auction_DataAccess.Context
@@ -15,5 +16,10 @@ namespace MyGalaxy_Auction_DataAccess.Context
         {
            
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Bid> Bids { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<PaymentHistory> PaymentHistories { get; set; }
     }
 }

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyGalaxy_Auction_Business\MyGalaxy_Auction_Business.csproj" />
     <ProjectReference Include="..\MyGalaxy_Auction_DataAccess\MyGalaxy_Auction_DataAccess.csproj" />
   </ItemGroup>
 

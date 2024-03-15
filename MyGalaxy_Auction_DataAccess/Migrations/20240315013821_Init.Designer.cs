@@ -12,8 +12,8 @@ using MyGalaxy_Auction_DataAccess.Context;
 namespace MyGalaxy_Auction_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240313210000_createTables")]
-    partial class createTables
+    [Migration("20240315013821_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,7 +192,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Bid");
+                    b.ToTable("Bids");
                 });
 
             modelBuilder.Entity("MyGalaxy_Auction_DataAccess.Domain.PaymentHistory", b =>
@@ -225,7 +225,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("PaymentHistory");
+                    b.ToTable("PaymentHistories");
                 });
 
             modelBuilder.Entity("MyGalaxy_Auction_DataAccess.Domain.Vehicle", b =>
@@ -291,7 +291,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasIndex("SellerId1");
 
-                    b.ToTable("Vehicle");
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("MyGalaxy_Auction_DataAccess.Models.ApplicationUser", b =>
