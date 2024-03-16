@@ -1,5 +1,11 @@
+using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyGalaxy_Auction_Business.Abstraction;
+using MyGalaxy_Auction_Business.Concrete;
+using MyGalaxy_Auction_Core.Models;
 using MyGalaxy_Auction_DataAccess.Context;
+using MyGalaxy_Auction_DataAccess.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +20,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+// dependency injection ile ilgili inteface'yi tetiklediðimiz zaman hangi sýnýfta bu interface metodunun override edildiðinin adresini belirtiyoruz.
+// IUserService verilirse bunun adresinin UserService içerisinde olduðunu bil diyoruz.
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddScoped(typeof(ApiResponse));
 
 var app = builder.Build();
 
