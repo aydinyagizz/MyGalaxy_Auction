@@ -25,10 +25,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 // dependency injection ile ilgili inteface'yi tetiklediðimiz zaman hangi sýnýfta bu interface metodunun override edildiðinin adresini belirtiyoruz.
 // IUserService verilirse bunun adresinin UserService içerisinde olduðunu bil diyoruz.
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+//builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(ApiResponse));
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MyGalaxy_Auction_Business.Dtos;
+using MyGalaxy_Auction_DataAccess.Domain;
 using MyGalaxy_Auction_DataAccess.Models;
 
 namespace MyGalaxy_Auction_Business.Mapper
@@ -13,7 +14,11 @@ namespace MyGalaxy_Auction_Business.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<RegisterRequestDTO, ApplicationUser>().ReverseMap();
+            //CreateMap<RegisterRequestDTO, ApplicationUser>().ReverseMap();
+            
+           
+            CreateMap<CreateVehicleDTO, Vehicle>().ReverseMap();
+
         }
     }
 }

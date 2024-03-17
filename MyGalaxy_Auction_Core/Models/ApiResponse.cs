@@ -11,7 +11,7 @@ namespace MyGalaxy_Auction_Core.Models
     {
         public ApiResponse()
         {
-            // her tetklendiğinde ErrorMessages listesini new'lesin boş bir liste halinde
+            // her tetiklendiğinde ErrorMessages listesini new'lesin boş bir liste halinde
             ErrorMessages = new List<string>();
         }
 

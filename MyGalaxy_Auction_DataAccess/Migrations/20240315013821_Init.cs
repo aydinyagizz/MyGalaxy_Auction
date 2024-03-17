@@ -178,15 +178,15 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SellerId = table.Column<int>(type: "int", nullable: false),
-                    SellerId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    SellerId = table.Column<int>(type: "nvarchar(450)", nullable: false),
+                    //SellerId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.VehicleId);
                     table.ForeignKey(
-                        name: "FK_Vehicles_AspNetUsers_SellerId1",
-                        column: x => x.SellerId1,
+                        name: "FK_Vehicles_AspNetUsers_SellerId",
+                        column: x => x.SellerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -311,9 +311,9 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_SellerId1",
+                name: "IX_Vehicles_SellerId",
                 table: "Vehicles",
-                column: "SellerId1");
+                column: "SellerId");
         }
 
         /// <inheritdoc />

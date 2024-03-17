@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyGalaxy_Auction_DataAccess.Models;
 
-namespace MyGalaxy_Auction_DataAccess.Domain
+namespace MyGalaxy_Auction_Business.Dtos
 {
-    public class Vehicle
+    public class UpdateVehicleDTO
     {
-        [Key]
-        public int VehicleId { get; set; }
         public string BrandAndModel { get; set; }
         public int ManufacturingYear { get; set; }
         public string Color { get; set; }
@@ -21,16 +17,12 @@ namespace MyGalaxy_Auction_DataAccess.Domain
         public string PlateNumber { get; set; }
         public double AuctionPrice { get; set; }
         public string AdditionalInformation { get; set; }
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; } = DateTime.UtcNow;
         public DateTime EndTime { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public string Image { get; set; }
 
         // bir aracın bir satıcısı olur.
         public string SellerId { get; set; }
-        public ApplicationUser Seller { get; set; }
-
-        // bir aracın birden fazla teklifi olabilir.
-        public virtual List<Bid> Bids { get; set; }
     }
 }

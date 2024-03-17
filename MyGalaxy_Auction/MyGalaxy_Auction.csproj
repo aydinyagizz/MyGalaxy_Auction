@@ -20,4 +20,8 @@
     <ProjectReference Include="..\MyGalaxy_Auction_DataAccess\MyGalaxy_Auction_DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>
