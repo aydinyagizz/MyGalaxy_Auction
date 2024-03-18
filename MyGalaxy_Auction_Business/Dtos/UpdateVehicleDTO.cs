@@ -26,6 +26,6 @@ namespace MyGalaxy_Auction_Business.Dtos
         // bir aracın bir satıcısı olur.
         public string SellerId { get; set; }
 
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace MyGalaxy_Auction.Extensions
             // IUserService verilirse bunun adresinin UserService içerisinde olduğunu bil diyoruz.
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IBidService, BidService>();
             services.AddScoped(typeof(ApiResponse));
             #endregion
 

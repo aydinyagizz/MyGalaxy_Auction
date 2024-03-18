@@ -12,7 +12,7 @@ using MyGalaxy_Auction_DataAccess.Context;
 namespace MyGalaxy_Auction_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240317204733_Init")]
+    [Migration("20240318201108_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -176,11 +176,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
-                        .IsRequired()
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VehicleId")
@@ -188,7 +184,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasKey("BidId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
@@ -209,10 +205,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                     b.Property<DateTime>("PayDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -221,7 +214,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
@@ -420,9 +413,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 {
                     b.HasOne("MyGalaxy_Auction_DataAccess.Models.ApplicationUser", "User")
                         .WithMany("Bids")
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("MyGalaxy_Auction_DataAccess.Domain.Vehicle", "Vehicle")
                         .WithMany("Bids")
@@ -439,7 +430,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 {
                     b.HasOne("MyGalaxy_Auction_DataAccess.Models.ApplicationUser", "User")
                         .WithMany("PaymentHistories")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

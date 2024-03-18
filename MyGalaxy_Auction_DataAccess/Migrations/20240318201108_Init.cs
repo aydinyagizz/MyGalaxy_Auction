@@ -200,25 +200,23 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                     BidAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BidDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BidStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bids", x => x.BidId);
                     table.ForeignKey(
-                        name: "FK_Bids_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Bids_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bids_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "VehicleId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,16 +227,15 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     PayDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentHistories", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK_PaymentHistories_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_PaymentHistories_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -290,9 +287,9 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bids_UserId1",
+                name: "IX_Bids_UserId",
                 table: "Bids",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bids_VehicleId",
@@ -300,9 +297,9 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentHistories_UserId1",
+                name: "IX_PaymentHistories_UserId",
                 table: "PaymentHistories",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PaymentHistories_VehicleId",
