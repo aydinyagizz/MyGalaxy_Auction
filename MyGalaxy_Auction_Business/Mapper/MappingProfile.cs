@@ -20,6 +20,9 @@ namespace MyGalaxy_Auction_Business.Mapper
             CreateMap<CreateVehicleDTO, Vehicle>().ReverseMap();
             CreateMap<UpdateVehicleDTO, Vehicle>().ReverseMap();
 
+            CreateMap<CreateBidDTO, Bid>().ReverseMap();
+            CreateMap<UpdateBidDTO, Bid>().ReverseMap();
+
         }
     }
 }

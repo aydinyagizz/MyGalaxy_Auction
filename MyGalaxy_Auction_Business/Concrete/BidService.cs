@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MyGalaxy_Auction_Business.Abstraction;
 using MyGalaxy_Auction_Business.Dtos;
+using MyGalaxy_Auction_Core.MailHelper;
 using MyGalaxy_Auction_Core.Models;
 using MyGalaxy_Auction_DataAccess.Context;
 using MyGalaxy_Auction_DataAccess.Domain;
@@ -18,11 +19,13 @@ namespace MyGalaxy_Auction_Business.Concrete
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private ApiResponse _response;
-        public BidService(ApplicationDbContext context, IMapper mapper, ApiResponse response)
+        private readonly IMailService _mailService;
+        public BidService(ApplicationDbContext context, IMapper mapper, ApiResponse response, IMailService mailService)
         {
             _context = context;
             _mapper = mapper;
             _response = response;
+            _mailService = mailService;
         }
         public async Task<ApiResponse> AutomaticallyCreateBid(CreateBidDTO model)
         {
@@ -106,6 +109,11 @@ namespace MyGalaxy_Auction_Business.Concrete
                 await _context.Bids.AddAsync(bid);
                 if (await _context.SaveChangesAsync() > 0)
                 {
+                    var userDetail = await _context.Bids.Include(x=>x.User).Where(x => x.UserId == model.UserId).FirstOrDefaultAsync();
+                    //mail gönderme işlemi 
+                    _mailService.SendMail("Your bid is success", "Your bid is : " + bid.BidAmount, bid.User.UserName);
+
+
                     _response.IsSuccess = true;
                     _response.Result = model;
                     return _response;
