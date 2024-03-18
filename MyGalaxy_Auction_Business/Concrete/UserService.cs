@@ -135,7 +135,7 @@ namespace MyGalaxy_Auction_Business.Concrete
                 {
                     await _userManager.AddToRoleAsync(newUser, UserType.Seller.ToString());
                 }
-                else
+                else if(model.UserType.ToString().ToLower() == UserType.User.ToString().ToLower())
                 {
                     await _userManager.AddToRoleAsync(newUser, UserType.User.ToString());
                 }

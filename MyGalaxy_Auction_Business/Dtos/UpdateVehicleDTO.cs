@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace MyGalaxy_Auction_Business.Dtos
 {
@@ -24,5 +25,7 @@ namespace MyGalaxy_Auction_Business.Dtos
 
         // bir aracın bir satıcısı olur.
         public string SellerId { get; set; }
+
+        public IFormFile File { get; set; }
     }
 }

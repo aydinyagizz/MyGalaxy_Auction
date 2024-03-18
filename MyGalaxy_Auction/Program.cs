@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyGalaxy_Auction.Extensions;
 using MyGalaxy_Auction_Business.Abstraction;
 using MyGalaxy_Auction_Business.Concrete;
 using MyGalaxy_Auction_Core.Models;
@@ -15,24 +16,22 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+// veritabaný baðlantý iþlemini yani context'i ve AddIdentity'i AddPersistenceLayer içerisine yazýp buraya dahil ettik
+builder.Services.AddPersistenceLayer(builder.Configuration);
 
-// dependency injection ile ilgili inteface'yi tetiklediðimiz zaman hangi sýnýfta bu interface metodunun override edildiðinin adresini belirtiyoruz.
-// IUserService verilirse bunun adresinin UserService içerisinde olduðunu bil diyoruz.
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IVehicleService, VehicleService>();
+//AddApplicationLayer adýnda bir middleware oluþturmuþ olduk.
+//program.cs class'ý çok kalabalýk olmasýn diye burdaki bazý kodlarý AddApplicationLayer class'ýna taþýdýk
+builder.Services.AddApplicationLayer(builder.Configuration);
+
+builder.Services.AddSwaggerCollection(builder.Configuration);
 
 builder.Services.AddSwaggerGen();
 
 //builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped(typeof(ApiResponse));
+
 
 var app = builder.Build();
 
@@ -45,7 +44,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
+//Bunu ekledik.
 app.UseAuthorization();
+
+//Bunu ekledik. Vehicles tablosundaki imagelere eriþip onlarý görüntülemeyi saðlar.
+app.UseStaticFiles();
 
 app.MapControllers();
 

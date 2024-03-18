@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyGalaxy_Auction_Business.Abstraction;
 using MyGalaxy_Auction_Business.Dtos;
@@ -64,7 +65,7 @@ namespace MyGalaxy_Auction.Controllers
 
         [HttpPut("UpdateVehicle")]
         // Route'dan id!yi alacağız.
-        public async Task<IActionResult> UpdateVehicle([FromRoute] int vehicleId, UpdateVehicleDTO model)
+        public async Task<IActionResult> UpdateVehicle(int vehicleId, [FromForm] UpdateVehicleDTO model)
         {
             if (ModelState.IsValid)
             {
@@ -77,8 +78,10 @@ namespace MyGalaxy_Auction.Controllers
             return BadRequest();
         }
 
+        //silme işlemini Authorize olmuş kullanıcı yapsın diyoruz ve bu kullanıcı da admin olması kısıtını ekledik.
+        [Authorize(Roles = "Administrator")]
         // [HttpDelete("{vehicleId}")] bu şekilde rougte'dan bir id göndereceğimizi söylüyoruz. tavsiye edilen bir yöntem değil.
-        [HttpDelete("{vehicleId}")]
+        [HttpDelete("Remove/Vehicle/{vehicleId}")]
         public async Task<IActionResult> DeleteVehicle([FromRoute] int vehicleId)
         {
             var result = await _vehicleService.DeleteVehicle(vehicleId);
@@ -89,7 +92,7 @@ namespace MyGalaxy_Auction.Controllers
             return BadRequest();
         }
 
-
+        // [HttpDelete("{vehicleId}")] bu şekilde rougte'dan bir id göndereceğimizi söylüyoruz. tavsiye edilen bir yöntem değil.
         [HttpGet("{vehicleId}")]
         public async Task<IActionResult> GetVehicleById([FromRoute] int vehicleId)
         {

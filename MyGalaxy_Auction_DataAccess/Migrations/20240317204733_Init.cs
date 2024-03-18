@@ -178,8 +178,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SellerId = table.Column<int>(type: "nvarchar(450)", nullable: false),
-                    //SellerId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    SellerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {

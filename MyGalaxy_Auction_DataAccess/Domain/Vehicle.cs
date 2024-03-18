@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MyGalaxy_Auction_DataAccess.Models;
 
@@ -28,6 +29,8 @@ namespace MyGalaxy_Auction_DataAccess.Domain
 
         // bir aracın bir satıcısı olur.
         public string SellerId { get; set; }
+
+        [JsonIgnore]
         public ApplicationUser Seller { get; set; }
 
         // bir aracın birden fazla teklifi olabilir.

@@ -12,7 +12,7 @@ using MyGalaxy_Auction_DataAccess.Context;
 namespace MyGalaxy_Auction_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240315013821_Init")]
+    [Migration("20240317204733_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -277,10 +277,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SellerId1")
+                    b.Property<string>("SellerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -289,7 +286,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
 
                     b.HasKey("VehicleId");
 
-                    b.HasIndex("SellerId1");
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Vehicles");
                 });
@@ -461,7 +458,7 @@ namespace MyGalaxy_Auction_DataAccess.Migrations
                 {
                     b.HasOne("MyGalaxy_Auction_DataAccess.Models.ApplicationUser", "Seller")
                         .WithMany("Vehicles")
-                        .HasForeignKey("SellerId1")
+                        .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
