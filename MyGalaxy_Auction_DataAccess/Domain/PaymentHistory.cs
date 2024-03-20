@@ -15,10 +15,11 @@ namespace MyGalaxy_Auction_DataAccess.Domain
         [Key]
         public int PaymentId { get; set; }
 
-
         public bool IsActive { get; set; }
         public DateTime PayDate { get; set; }
 
+        public string ClientSecret { get; set; }
+        public string StripePaymentIntentId { get; set; }
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 

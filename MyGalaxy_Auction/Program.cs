@@ -26,6 +26,8 @@ builder.Services.AddApplicationLayer(builder.Configuration);
 
 builder.Services.AddSwaggerCollection(builder.Configuration);
 
+builder.Services.AddInfrastructreLayer(builder.Configuration);
+
 builder.Services.AddSwaggerGen();
 
 //builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
