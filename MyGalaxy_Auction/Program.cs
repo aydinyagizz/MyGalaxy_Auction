@@ -30,6 +30,10 @@ builder.Services.AddInfrastructreLayer(builder.Configuration);
 
 builder.Services.AddSwaggerGen();
 
+
+//frontend tarafýndan baðlanabilsin diye
+builder.Services.AddCors();
+
 //builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -43,6 +47,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//frontend tarafýndan baðlanabilsin diye
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 
 app.UseHttpsRedirection();
 
